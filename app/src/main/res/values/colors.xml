@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base -->
+    <color name="bg_dark">#0F1117</color>
+    <color name="card_surface">#1C1F2E</color>
+    <color name="card_voice">#252840</color>
+    <color name="white">#FFFFFF</color>
+
+    <!-- Text -->
+    <color name="text_secondary">#8A8FA8</color>
+    <color name="text_hint">#44475A</color>
+
+    <!-- Accent -->
+    <color name="accent_blue">#4F7FFA</color>
+    <color name="accent_blue_dark">#3A68D8</color>
+
+    <!-- Feedback -->
+    <color name="correct_green">#2E7D52</color>
+    <color name="wrong_red">#C0392B</color>
+
+    <!-- Topic Cards -->
+    <color name="card_arithmetic">#2E7D32</color>
+    <color name="card_algebra">#1565C0</color>
+    <color name="card_geometry">#E65100</color>
+    <color name="card_trig">#6A1B9A</color>
+    <color name="card_functions">#00838F</color>
+    <color name="card_limits">#880E4F</color>
+    <color name="card_diff">#BF360C</color>
+    <color name="card_integration">#37474F</color>
+
+    <!-- Mic states -->
+    <color name="mic_idle">#2A2D3E</color>
+    <color name="mic_listening">#4F7FFA</color>
+
+    <!-- Material baseline (required) -->
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+</resources>

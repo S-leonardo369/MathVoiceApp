@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Math Voice</string>
+    <string name="tap_mic">Tap the mic and speak your answer</string>
+    <string name="listening">Listening…</string>
+    <string name="correct">Correct!</string>
+    <string name="incorrect">Incorrect</string>
+    <string name="next">Next Question</string>
+    <string name="hint">Hint</string>
+    <string name="score">Score</string>
+    <string name="no_hint">No hint available for this question.</string>
+</resources>

@@ -1,0 +1,29 @@
+# Android build outputs
+/app/build/
+/build/
+
+# Local SDK & keystore config (machine-specific)
+local.properties
+*.jks
+*.keystore
+
+# Android Studio project files
+.idea/
+*.iml
+.DS_Store
+Thumbs.db
+
+# Gradle caches (downloaded automatically)
+.gradle/
+gradle/wrapper/gradle-wrapper.jar
+
+# Generated code (Safe Args, ViewBinding — built on sync)
+app/src/main/java/com/mathvoiceapp/databinding/
+app/src/main/java/com/mathvoiceapp/ui/home/HomeFragmentDirections.kt
+app/src/main/java/com/mathvoiceapp/ui/quiz/QuizFragmentDirections.kt
+app/src/main/java/com/mathvoiceapp/ui/quiz/QuizFragmentArgs.kt
+app/src/main/java/com/mathvoiceapp/ui/quiz/ResultFragmentArgs.kt
+
+# OS junk
+.DS_Store
+*.swp

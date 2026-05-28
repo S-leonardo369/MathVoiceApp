@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.MathVoiceApp" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">@color/accent_blue</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimaryContainer">@color/card_surface</item>
+        <item name="colorOnPrimaryContainer">@color/white</item>
+        <item name="colorSecondary">@color/accent_blue</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorBackground">@color/bg_dark</item>
+        <item name="colorOnBackground">@color/white</item>
+        <item name="colorSurface">@color/card_surface</item>
+        <item name="colorOnSurface">@color/white</item>
+        <item name="android:windowBackground">@color/bg_dark</item>
+        <item name="android:statusBarColor">@color/bg_dark</item>
+        <item name="android:navigationBarColor">@color/bg_dark</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
+    <!-- Difficulty button style -->
+    <style name="DifficultyButton" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">13sp</item>
+        <item name="strokeColor">@color/card_surface</item>
+        <item name="android:backgroundTint">@color/card_surface</item>
+    </style>
+
+    <!-- Selected state via selector in code; this is the base -->
+    <style name="DifficultyButton.Selected">
+        <item name="android:backgroundTint">@color/accent_blue</item>
+        <item name="strokeColor">@color/accent_blue</item>
+    </style>
+
+</resources>
