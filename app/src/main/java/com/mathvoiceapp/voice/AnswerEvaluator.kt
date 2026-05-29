@@ -42,7 +42,47 @@ object AnswerEvaluator {
     fun normalize(raw: String): String {
         var s = raw.lowercase().trim()
 
-        // ── Spoken number words → digits ────────────────────────────────
+        // ── Step 1: Multi-word math phrases FIRST (order matters — longest/most specific first) ──
+        s = s
+            .replace("does not exist", "dne")
+            .replace("doesn't exist", "dne")
+            .replace("does not exist", "dne")
+            .replace("positive infinity", "∞")
+            .replace("negative infinity", "-∞")
+            .replace("one and a half", "3/2")   // must be before "one", "half"
+            .replace("three halves", "3/2")      // must be before "three", "half"
+            .replace("two thirds", "2/3")        // must be before "two", "thirds"
+            .replace("three quarters", "3/4")    // must be before "three", "quarters"
+            .replace("a quarter", "1/4")         // must be before "quarter"
+            .replace("a third", "1/3")           // must be before "third"
+            .replace("a half", "1/2")            // must be before "half"
+            .replace("plus or minus", "±")
+            .replace("positive or negative", "±")
+            .replace("plus-minus", "±")
+            .replace("square root of", "√")      // must be before "square root"
+            .replace("square root", "√")
+            .replace("cube root of", "∛")        // must be before "cube root"
+            .replace("cube root", "∛")
+            .replace("natural log of", "ln")     // must be before "natural log"
+            .replace("natural log", "ln")
+            .replace("log of", "log")
+            .replace("euler's number", "e")
+            .replace("euler number", "e")
+            .replace("x equals", "x=")           // must be before "equals"
+            .replace("x equal to", "x=")
+            .replace("x is ", "x=")              // Bug 7 fix: "x is 3" → "x=3"
+            .replace("y equals", "y=")
+            .replace("y is ", "y=")
+            .replace("k equals", "k=")
+            .replace("sin squared", "sin²")      // must be before "squared"
+            .replace("cos squared", "cos²")
+            .replace("sec squared", "sec²")
+            .replace("x squared", "x²")          // must be before "squared"
+            .replace("x cubed", "x³")            // must be before "cubed"
+            .replace(" to the power of ", "^")
+            .replace(" to the power ", "^")
+
+        // ── Step 2: Single number words → digits ─────────────────────────
         val numberWords = linkedMapOf(
             "nineteen" to "19", "eighteen" to "18", "seventeen" to "17",
             "sixteen" to "16", "fifteen" to "15", "fourteen" to "14",
@@ -67,47 +107,20 @@ object AnswerEvaluator {
             s = s.replace(word, digit)
         }
 
-        // ── Math vocabulary → symbols ───────────────────────────────────
+        // ── Step 3: Remaining symbol replacements ─────────────────────────
         s = s
-            .replace("does not exist", "dne")
-            .replace("doesn't exist", "dne")
-            .replace("undefined", "undefined")
-            .replace("positive infinity", "∞")
-            .replace("negative infinity", "-∞")
             .replace("infinity", "∞")
             .replace("infinite", "∞")
-            .replace("euler's number", "e")
-            .replace("euler number", "e")
-            .replace("pi", "π")
-            .replace("plus or minus", "±")
-            .replace("positive or negative", "±")
-            .replace("plus-minus", "±")
-            .replace("x equals", "x=")
-            .replace("x equal to", "x=")
-            .replace("y equals", "y=")
-            .replace("k equals", "k=")
+            .replace("sqrt", "√")
             .replace("equals", "=")
             .replace("equal to", "=")
-            .replace(" to the power of ", "^")
-            .replace(" to the power ", "^")
             .replace(" squared", "^2")
             .replace(" cubed", "^3")
             .replace("^2", "²")
             .replace("^3", "³")
             .replace("^4", "⁴")
-            .replace("square root of", "√")
-            .replace("square root", "√")
-            .replace("sqrt", "√")
-            .replace("cube root of", "∛")
-            .replace("cube root", "∛")
-            .replace("natural log of", "ln")
-            .replace("natural log", "ln")
-            .replace("log of", "log")
-            .replace("sin squared", "sin²")
-            .replace("cos squared", "cos²")
-            .replace("sec squared", "sec²")
-            .replace("x squared", "x²")
-            .replace("x cubed", "x³")
+            .replace("pi", "π")
+            .replace("half", "1/2")            // safe now — "a half" already handled in Step 1
             .replace("multiplied by", "*")
             .replace(" times ", "*")
             .replace(" divided by ", "/")
@@ -116,28 +129,21 @@ object AnswerEvaluator {
             .replace(" minus ", "-")
             .replace("negative ", "-")
             .replace("positive ", "")
-            .replace("half", "1/2")
-            .replace("a half", "1/2")
-            .replace("a third", "1/3")
-            .replace("a quarter", "1/4")
-            .replace("two thirds", "2/3")
-            .replace("three quarters", "3/4")
-            .replace("three halves", "3/2")
-            .replace("one and a half", "3/2")
             .replace(" and ", " ")
+            .replace("undefined", "undefined")
 
-        // ── Fraction spoken as "N over D" ───────────────────────────────
+        // ── Step 4: Spoken fraction "N over D" (digit form) ──────────────
         s = s.replace(Regex("(\\d+) over (\\d+)")) { mr ->
             "${mr.groupValues[1]}/${mr.groupValues[2]}"
         }
 
-        // ── Remove all spaces around math operators ─────────────────────
+        // ── Step 5: Collapse operator spacing ─────────────────────────────
         s = s.replace(" + ", "+").replace("+ ", "+").replace(" +", "+")
         s = s.replace(" - ", "-").replace("- ", "-").replace(" -", "-")
         s = s.replace(" * ", "*").replace("× ", "*").replace(" ×", "*").replace("×", "*")
         s = s.replace(" / ", "/")
 
-        // ── Collapse whitespace ─────────────────────────────────────────
+        // ── Step 6: Collapse whitespace ────────────────────────────────────
         s = s.replace(Regex("\\s+"), " ").trim()
 
         return s

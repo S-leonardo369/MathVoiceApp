@@ -34,35 +34,19 @@ class QuizViewModel : ViewModel() {
     private var score = 0
 
     fun startQuiz(topic: Topic, difficulty: Difficulty) {
-        val topicsToInclude = if (topic == Topic.LIMITS || topic == Topic.DIFFERENTIATION || topic == Topic.INTEGRATION) {
-            // Harder topics only have relevant difficulties; pad from all
-            listOf(topic)
-        } else {
-            listOf(topic)
-        }
-
-        val allDifficulties = when (difficulty) {
+        // Include questions up to and including the selected difficulty
+        val difficulties = when (difficulty) {
             Difficulty.EASY   -> listOf(Difficulty.EASY)
             Difficulty.MEDIUM -> listOf(Difficulty.EASY, Difficulty.MEDIUM)
             Difficulty.HARD   -> listOf(Difficulty.EASY, Difficulty.MEDIUM, Difficulty.HARD)
         }
 
-        questions = QuestionBank.getAllForMode(topicsToInclude, allDifficulties)
-            .take(15)  // cap at 15 per session
-            .ifEmpty {
-                // Fallback: any questions for that topic
-                QuestionBank.getRandomQuestions(topic, 15)
-            }
+        questions = QuestionBank.getAllForMode(listOf(topic), difficulties)
+            .take(15)
+            .ifEmpty { QuestionBank.getRandomQuestions(topic, 15) }
 
         if (questions.isEmpty()) return
 
-        currentIndex = 0
-        score = 0
-        emitCurrentState(AnswerState.NONE)
-    }
-
-    fun startMixedQuiz(difficulties: List<Difficulty>) {
-        questions = QuestionBank.getAllForMode(Topic.values().toList(), difficulties).take(20)
         currentIndex = 0
         score = 0
         emitCurrentState(AnswerState.NONE)

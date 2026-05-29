@@ -281,6 +281,7 @@ class QuizFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         pulseAnimator?.cancel()
+        handler.removeCallbacksAndMessages(null)   // Bug 3 fix: cancel any pending postDelayed
         voiceManager.destroy()
         _binding = null
     }

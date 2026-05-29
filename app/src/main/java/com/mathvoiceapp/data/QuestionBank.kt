@@ -321,8 +321,8 @@ object QuestionBank {
                 "What is the sum of interior angles in a polygon with 8 sides?", "1080°",
                 listOf("1080", "1080 degrees"), explanation = "(n-2)×180 = 6×180"),
             MathQuestion("ge_h_10", Topic.GEOMETRY, Difficulty.HARD,
-                "Distance from point (3, 4) to the line 4x + 3y = 0?", "5",
-                listOf("5", "five"), explanation = "|4(3)+3(4)|/√(16+9) = 24/5... wait no, = |12+12|/5 = 24/5. Hmm let me check: |4×3+3×4+0|/5 = 24/5"),
+                "Distance from point (0, 0) to the line 3x + 4y - 10 = 0?", "2",
+                listOf("2", "two"), explanation = "|3(0)+4(0)-10| / √(9+16) = 10/5 = 2"),
         ))
 
         // ── TRIGONOMETRY ─ EASY ──────────────────────────────────────────
@@ -408,8 +408,8 @@ object QuestionBank {
                 "What is sin(A - B)?", "sinA cosB - cosA sinB",
                 listOf("sinAcosB-cosAsinB", "sin A cos B minus cos A sin B")),
             MathQuestion("tr_h_07", Topic.TRIGONOMETRY, Difficulty.HARD,
-                "In a triangle, if A = 60°, a = 10, b = 8, find sinB (Law of Sines).", "4√3/10",
-                listOf("4√3/10", "2√3/5", "0.693"), explanation = "sinB/b = sinA/a"),
+                "In a triangle, if A = 60°, a = 10, b = 8, find sinB (Law of Sines).", "2√3/5",
+                listOf("2√3/5", "4√3/10", "2 root 3 over 5", "0.693", "0.6928"), explanation = "sinB/b = sinA/a → sinB = 8·(√3/2)/10 = 4√3/10 = 2√3/5"),
             MathQuestion("tr_h_08", Topic.TRIGONOMETRY, Difficulty.HARD,
                 "What is the principal value of arcsin(1)?", "π/2",
                 listOf("π/2", "pi/2", "90°", "90 degrees")),
